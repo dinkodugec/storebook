@@ -1,5 +1,46 @@
 <?php require "../includes/header_auth.php"; ?>
 <?php require "../config/config.php"; ?>
+
+<?php
+
+      if(isset($_POST['submit'])){
+
+           if(empty($_POST['username'] OR $_POST['email'] OR $_POST['password'])){
+               echo "<script>alert('One or more inputs are empty')</script>";
+           }else{
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $email = $_POST['email'];
+
+
+            $insert = $conn->prepare("INSERT INTO users (username, email, password)
+              VALUES (:username, :email, :password)");
+
+              $insert->execute([
+                ':username' => $username,
+                ':email' => $email,
+                'password'=>password_hash($password, PASSWORD_DEFAULT)
+              ]);
+              header("Location:login.php");
+           }
+
+           
+
+     
+
+
+      }
+
+
+
+
+
+?>
+
+
+
+
+
 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
   aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
@@ -46,27 +87,27 @@
 
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <form class="form-control mt-5">
+      <form class="form-control mt-5" method="POST" action="register.php">
         <h4 class="text-center mt-3"> Register </h4>
         <div class="">
           <label for="" class="col-sm-2 col-form-label">Username</label>
           <div class="">
-            <input type="text" class="form-control" id="" value="">
+            <input type="text" name="username" class="form-control" id="" value="">
           </div>
         </div>
         <div class="">
           <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
           <div class="">
-            <input type="email" class="form-control" id="" value="">
+            <input type="email" name="email" class="form-control" id="" value="">
           </div>
         </div>
         <div class="">
           <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
           <div class="">
-            <input type="password" class="form-control" id="inputPassword">
+            <input type="password" name="password" class="form-control" id="inputPassword">
           </div>
         </div>
-        <button class="w-100 btn btn-lg btn-primary mt-4 mb-4" type="submit">register</button>
+        <button class="w-100 btn btn-lg btn-primary mt-4 mb-4" name="submit" type="submit">Register</button>
 
       </form>
     </div>
