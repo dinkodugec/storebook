@@ -1,5 +1,6 @@
 <?php require "includes/header.php"; ?>
 
+
 <div class="row mt-5">
   <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
     <div class="card">
@@ -16,6 +17,7 @@
       </div>
     </div>
   </div>
+  <!--  <?php echo $_SESSION['username']; ?>  just for check -->
   <br>
   <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1 mb-5">
     <div class="card">
