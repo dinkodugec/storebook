@@ -36,6 +36,11 @@ if(isset($_GET['id'])){
  
        $id = $_GET['id'];
 
+       //checking for product in cart
+       $select = $conn->query("SELECT * FROM cart WHERE product_id = '$id' AND user_id='$_SESSION[user_id]'");
+       $select->execute();
+
+       //getting data for every product
        $row = $conn->query("SELECT * FROM products WHERE status = 1 AND id='$id'");
        $row->execute();
 
@@ -107,8 +112,16 @@ if(isset($_GET['id'])){
 
 
                 <div class="cart mt-4 align-items-center">
+                  <?php if($select->rowCount() > 0)   :?>
+                  <!-- I means that we have item in cart -->
+                  <button name="submit" id="submit" disabled class="btn btn-primary text-uppercase mr-2 px-4"
+                    type="submit"><i class="fas fa-shopping-cart"></i> Added to cart</button>
+                  <?php else: ?>
+
                   <button name="submit" id="submit" class="btn btn-primary text-uppercase mr-2 px-4" type="submit"><i
                       class="fas fa-shopping-cart"></i> Add to cart</button>
+
+                  <?php endif;  ?>
                 </div>
               </form>
             </div>
@@ -137,6 +150,8 @@ $(document).ready(function() {
 
       success: function() {
         alert("added to car successfully");
+        $("#submit").html("<i class='fas fa-shopping-cart'></i> Added to a cart").prop(
+          "disabled", true);
       }
     })
   })
