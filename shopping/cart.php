@@ -35,11 +35,12 @@
                     <th scope="col">Quantity</th>
                     <th scope="col">Total Price</th>
                     <th scope="col">Update</th>
-                    <th scope="col"><a href="#" class="btn btn-danger text-white">Clear</a></th>
+                    <th scope="col"><button class="delete-all btn btn-danger text-white">Clear</button></th>
                   </tr>
                 </thead>
                 <tbody>
-                  <?php   foreach($allProducts as $product) : ?>
+                  <?php if(count($allProducts) > 0) :?>
+                  <?php foreach($allProducts as $product) : ?>
 
                   <tr class="mb-4">
 
@@ -62,12 +63,18 @@
                           class="fas fa-pen"></i> </button>
                     </td>
 
-                    <td><button value="<?= $product->id; ?>" class="btn btn-danger text-white"><i
+                    <td><button value="<?= $product->id; ?>" class="btn-delete btn btn-danger text-white"><i
                           class="fas fa-trash-alt"></i> </button>
                     </td>
 
                   </tr>
                   <?php endforeach; ?>
+
+                  <?php else : ?>
+                  <div class="alert alert-danger bg-danger text-white">
+                    There is no products in cart
+                  </div>
+                  <?php endif; ?>
 
                 </tbody>
               </table>
@@ -147,6 +154,43 @@ $(document).ready(function() {
     fetch();
   });
 
+
+  $(".btn-delete").on('click', function(e) {
+
+    var id = $(this).val();
+
+
+    $.ajax({
+      type: "POST",
+      url: "delete-item.php",
+      data: {
+        delete: "delete",
+        id: id
+      },
+
+      success: function() {
+        alert("product deleted successfully");
+        reload();
+      }
+    })
+  });
+
+  $(".delete-all").on('click', function(e) {
+
+    $.ajax({
+      type: "POST",
+      url: "delete-all-item.php",
+      data: {
+        delete: "delete",
+      },
+
+      success: function() {
+        alert("All products deleted successfully");
+        reload();
+      }
+    })
+  });
+
   /* fetch(); */
 
   function fetch() {
@@ -160,7 +204,7 @@ $(document).ready(function() {
     }, 4000); // 4 seconds
   }
 
-  function reload() {
+  function reload() { //reload page
 
 
     $("body").load("cart.php")
