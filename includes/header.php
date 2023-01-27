@@ -3,7 +3,18 @@
 
 session_start();
 
-define("APPURL", "http://store.hr:8080/")
+define("APPURL", "http://store.hr:8080/");
+
+require dirname(dirname(__FILE__)) . "/config/config.php";
+
+if(isset($_SESSION['user_id'])){
+
+  $number = $conn->query("SELECT COUNT(*) as number_products FROM cart WHERE user_id='$_SESSION[user_id]'");
+  $number->execute();
+  $getNumber = $number->fetch(PDO::FETCH_OBJ);
+}
+
+
 
 
 ?>
@@ -51,7 +62,7 @@ define("APPURL", "http://store.hr:8080/")
           <?php if(isset($_SESSION['username'])) : ?>
           <li class="nav-item">
             <a class="nav-link active  text-white" aria-current="page" href="<?php echo APPURL; ?>shopping/cart.php"><i
-                class="fas fa-shopping-cart"></i>(2)</a>
+                class="fas fa-shopping-cart"></i><?=  " " . "  " ; ?><?=$getNumber->number_products  ; ?></a>
           </li>
 
           <li class="nav-item dropdown">

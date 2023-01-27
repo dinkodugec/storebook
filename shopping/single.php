@@ -162,8 +162,15 @@ $(document).ready(function() {
         alert("added to car successfully");
         $("#submit").html("<i class='fas fa-shopping-cart'></i> Added to a cart").prop(
           "disabled", true);
+        ref();
       }
-    })
+    });
+
+    function ref() { //reload page
+
+      $("body").load("single.php?id=<?php echo $id; ?>");
+
+    }
   })
 });
 </script>
