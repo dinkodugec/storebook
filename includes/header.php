@@ -9,7 +9,7 @@ require dirname(dirname(__FILE__)) . "/config/config.php";
 
 if(isset($_SESSION['user_id'])){
 
-  $number = $conn->query("SELECT COUNT(*) as number_products FROM cart WHERE user_id='$_SESSION[user_id]'");
+  $number = $conn->query("SELECT COUNT(*) as number_products FROM cart WHERE user_id='$_SESSION[user_id]'");  //in if condition because it throw a indefined index, user_id, so it preformm when user is login
   $number->execute();
   $getNumber = $number->fetch(PDO::FETCH_OBJ);
 }
