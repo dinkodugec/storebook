@@ -3,7 +3,7 @@
 
 <!-- Heading -->
 
-<?php echo $_SESSION['price']  ; ?>
+<?php echo $_SESSION['user_id']  ; ?>
 <h2 class="my-5 h2 text-center">Checkout</h2>
 
 
