@@ -10,7 +10,7 @@ die();
 
 \Stripe\Stripe::setApiKey($secret_key);
 
-
+APPURL;
 
 
  if(isset($_POST['email'])){ 
@@ -58,10 +58,10 @@ $charge = \Stripe\Charge::create([
 ]); 
 
 
+header("Location: ".APPURL."download.php "); 
 
 
 
-
-header('Location: success.php?tid='.$charge->id.'&product='.$charge->description);
+/* header('Location: success.php?tid='.$charge->id.'&product='.$charge->description); */
 
 ?>
