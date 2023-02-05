@@ -1,6 +1,7 @@
 <?php require "../includes/header.php"; ?>
 <?php require "../config/config.php"; ?>
 
+
 <!-- Heading -->
 
 <?php echo $_SESSION['user_id']  ; ?>

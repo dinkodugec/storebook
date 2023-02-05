@@ -4,9 +4,6 @@
 
 <?php 
 
-/* var_dump($_POST);
-die();
- */
 
 \Stripe\Stripe::setApiKey($secret_key);
 
