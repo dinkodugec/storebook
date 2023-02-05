@@ -1,7 +1,11 @@
 <?php require "../includes/header.php"; ?>
 <?php require "../config/config.php"; ?>
 
-
+<?php
+if(!isset($_SESSION['username'])){
+          header("Location: http://store.hr:8080/");
+        }
+?>
 <!-- Heading -->
 
 <?php echo $_SESSION['user_id']  ; ?>

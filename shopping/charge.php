@@ -2,6 +2,12 @@
 <?php require "../config/config.php"; ?>
 <?php require "../vendor/autoload.php"; ?>
 
+<?php
+if(!isset($_SESSION['username'])){
+          header("Location: http://store.hr:8080/");
+        }
+?>
+
 <?php 
 
 
