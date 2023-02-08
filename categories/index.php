@@ -2,11 +2,16 @@
 <?php require "../config/config.php"; ?>
 
 <?php
+    
+ 
 
-     $select = $conn->query("SELECT * FROM categories");
-     $select->execute();
+        $select = $conn->query("SELECT * FROM categories");
+        $select->execute();
+   
+        $categories = $select->fetchAll(PDO::FETCH_OBJ);
+   
+   
 
-     $categories = $select->fetchAll(PDO::FETCH_OBJ);
 
 
 
@@ -25,7 +30,8 @@
           <div class="text-muted"><?php echo $category->description;?></div>
 
         </div>
-        <a href="#" class="btn btn-primary w-100 rounded my-2">Discover Products</a>
+        <a href="<?php echo APPURL; ?>/categories/single_category.php?id=<?php echo $category->id; ?>"
+          class="btn btn-primary w-100 rounded my-2">Discover Products</a>
       </div>
     </div>
   </div>

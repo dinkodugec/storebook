@@ -1,13 +1,17 @@
-<?php require "includes/header.php"; ?>
-<?php require "config/config.php"; ?>
+<?php require "../includes/header.php"; ?>
+<?php require "../config/config.php"; ?>
 
 <?php
-       $rows = $conn->query("SELECT * FROM products WHERE status = 1");
+
+if(isset($_GET['id'])){
+
+  $id = $_GET['id'];
+       $rows = $conn->query("SELECT * FROM products WHERE status = 1 AND category_id = '$id' ");
        $rows->execute();
 
       $allRows = $rows->fetchAll(PDO::FETCH_OBJ);
 
-      
+}
 
 ?>
 
@@ -16,7 +20,7 @@
   <?php foreach($allRows as $product) : ?>
   <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
     <div class="card">
-      <img height="213px" class="card-img-top" src="images/<?php echo $product->image; ?>">
+      <img height="213px" class="card-img-top" src="../images/<?php echo $product->image; ?>">
       <div class="card-body">
         <h5 class="d-inline"><b><?php echo $product->name; ?></b> </h5>
         <h5 class="d-inline">
@@ -34,4 +38,4 @@
   <?php endforeach; ?>
 </div>
 
-<?php require "includes/footer.php"; ?>
+<?php require "../includes/footer.php"; ?>
