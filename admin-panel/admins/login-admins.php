@@ -4,9 +4,9 @@
 <?php
 
 
-              /*     if(isset($_SESSION['username'])){
-                      header("Location: http://store.hr:8080/");
-                  } */
+               if(isset($_SESSION['adminname'])){
+                      header("Location: ".ADMINURL."");
+                  } 
 
 
                  if(isset($_POST['submit'])){
@@ -25,15 +25,16 @@
 
                         $fetch = $login->fetch(PDO::FETCH_ASSOC);
                       
+                      
 
                            if($login->rowCount() > 0){
 
                               if(password_verify($password, $fetch['password'])){
-                                 /*   $_SESSION['username'] = $fetch['username'];
-                                    $_SESSION['user_id'] = $fetch['id'];
+                                   $_SESSION['adminname'] = $fetch['adminname'];
+                                    $_SESSION['admin_id'] = $fetch['id'];
                                  
-                                    header("Location: ../index.php"); */
-                                    echo "<script>alert('right');</script>";
+                                    header("Location: http://store.hr:8080/admin-panel");
+                                   /*  echo "<script>alert('right');</script>"; */
                                }else{
                               echo "<script>alert('password or email is wrong')</script>";
                              }
@@ -75,4 +76,11 @@
     </div>
 
 
+    <?php
+     
+  
+    
+    
+    
+    ;?>
     <?php require "../layouts/footer.php" ; ?>
