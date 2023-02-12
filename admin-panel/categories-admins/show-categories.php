@@ -31,7 +31,8 @@
             <tr>
               <th scope="row"><?php echo  $category->id;?></th>
               <td><?php echo  $category->name; ?></td>
-              <td><a href="<?php ADMINURL; ?>/categories-admins/update-category.php?id=<?php echo  $category->id;?>"
+              <td><a
+                  href="<?php ADMINURL; ?>/admin-panel/categories-admins/update-category.php?id=<?php echo  $category->id;?>"
                   class="btn btn-warning text-white text-center ">Update </a>
               </td>
               <td><a
