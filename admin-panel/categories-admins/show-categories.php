@@ -34,7 +34,8 @@
               <td><a href="<?php ADMINURL; ?>/categories-admins/update-category.php?id=<?php echo  $category->id;?>"
                   class="btn btn-warning text-white text-center ">Update </a>
               </td>
-              <td><a href="<?php ADMINURL; ?>/categories-admins/delete-category.php?id<?php echo  $category->id;?>"
+              <td><a
+                  href="<?php ADMINURL; ?>/admin-panel/categories-admins/delete-category.php?id=<?php echo $category->id;?>"
                   class="btn btn-danger  text-center ">Delete </a></td>
             </tr>
             <?php endforeach ;  ?>
