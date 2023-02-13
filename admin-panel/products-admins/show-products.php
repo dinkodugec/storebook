@@ -38,7 +38,9 @@ $products= $select->fetchAll(PDO::FETCH_OBJ);
               <td><?php echo $product->name; ?></td>
               <td>2<?php echo $product->price; ?></td>
               <td><a href="#" class="btn btn-success  text-center ">verfied</a></td>
-              <td><a href="#" class="btn btn-danger  text-center ">delete</a></td>
+              <td><a
+                  href="<?php ADMINURL; ?>/admin-panel/products-admins/delete-products.php?id=<?php echo $product->id ; ?>"
+                  class="btn btn-danger  text-center ">delete</a></td>
             </tr>
             <?php endforeach; ?>
           </tbody>
