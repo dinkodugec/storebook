@@ -4,7 +4,7 @@
 <?php
 
     if(!isset($_SESSION['adminname'])){
-      header("Location: http://store.hr:8080/");
+      header("Location: http://store.hr:8080/admins/login-admins.php");
     }
 
     if(isset($_POST['submit'])){

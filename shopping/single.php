@@ -73,7 +73,8 @@ if(isset($_GET['id'])){
         <div class="row">
           <div class="col-md-6">
             <div class="images p-3">
-              <div class="text-center p-4"> <img id="main-image" src="../images/<?php echo $product->image; ?>"
+              <div class="text-center p-4"> <img id="main-image"
+                  src="http://store.hr:8080/admin-panel/products-admins/images/<?php echo $product->image; ?>"
                   width="250" /> </div>
             </div>
           </div>

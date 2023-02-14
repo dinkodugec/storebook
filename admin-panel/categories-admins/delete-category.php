@@ -3,6 +3,10 @@
 
 <?php
 
+          if(!isset($_SESSION['adminname'])){
+               header("Location: http://store.hr:8080/admins/login-admins.php");
+          }
+
      if(isset($_GET['id'])){
       $id = $_GET['id'];
 

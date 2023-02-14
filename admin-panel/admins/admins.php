@@ -3,6 +3,10 @@
 
 <?php
 
+    if(!isset($_SESSION['adminname'])){
+      header("Location: http://store.hr:8080/admins/login-admins.php");
+    }
+
        $select = $conn->query("SELECT * FROM admins");
        $select->execute();
 
