@@ -3,6 +3,16 @@
 
 <?php
 
+
+
+       $select = $conn->query("SELECT * FROM categories");
+       $select->execute();
+
+       $categories = $select->fetchAll(PDO::FETCH_OBJ);
+
+
+
+
       if(isset($_POST['submit'])){
         if(empty($_POST['name'] OR empty($_POST['description']) OR empty($_POST['price']))){
           echo "<script>alert('One or more inputs are empty')</script>";
@@ -71,8 +81,10 @@
             <label for="exampleFormControlSelect1">Select Category</label>
             <select name="category_id" class="form-control" id="exampleFormControlSelect1">
               <option>--select category--</option>
-              <option value="1">Design</option>
-              <option>Programming</option>
+              <?php foreach($categories as $category) : ?>
+              <option value="<?php echo $category->id; ?>"><?php echo $category->name; ?></option>
+              <!-- SO, here category id is insert in DB and name of this category is shown -->
+              <?php endforeach; ?>
             </select>
           </div>
 
