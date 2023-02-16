@@ -62,8 +62,9 @@ if(!isset($_SESSION['username'])){
 
                     <th scope="row"><?= $product->product_id; ?></th>
 
-                    <td><img width="100" height="100" src="../images/<?php echo $product->product_image; ?>"
-                        class="img-fluid rounded-3" alt="Cotton T-shirt">
+                    <td><img width="100" height="100"
+                        src="<?php echo IMAGEURL; ?>/<?php echo $product->product_image; ?>" class="img-fluid rounded-3"
+                        alt="Cotton T-shirt">
                     </td>
 
                     <td><?= $product->product_name; ?></td>

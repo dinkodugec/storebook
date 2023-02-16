@@ -4,7 +4,10 @@
 session_start();
 
 define("APPURL", "http://store.hr:8080/");
-
+define("IMAGEURL", "http://store.hr:8080/admin-panel/products-admins/images");
+/* var_dump(IMAGEURL); 
+die();
+ */
 require dirname(dirname(__FILE__)) . "/config/config.php";
 
 if(isset($_SESSION['user_id'])){

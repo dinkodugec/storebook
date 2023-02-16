@@ -2,6 +2,12 @@
 <?php require "config/config.php"; ?>
 <?php 
 
+if(isset($_SERVER['HTTP_REFERER'])){
+  //redirect them to your desired location
+  header('Location: http://store.hr:8080/');
+  exit;
+}
+
   $select = $conn->query("SELECT * FROM cart WHERE user_id='$_SESSION[user_id]'");
   $select->execute();
   $allProducts = $select->fetchAll(PDO::FETCH_OBJ);
@@ -12,7 +18,8 @@ $zipname = 'bookstore.zip';
 $zip = new ZipArchive;
 $zip->open($zipname, ZipArchive::CREATE);
 foreach ($allProducts as $product) {
-  $zip->addFile("books/". $product->product_file);
+ /*  $zip->addFile("http://store.hr:8080/admin-panel/products-admins/books/". $product->product_file); */
+  $zip->addFile("admin-panel/products-admins/books/". $product->product_file);
 }
 $zip->close();
 
