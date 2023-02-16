@@ -2,6 +2,8 @@
 <?php require "config/config.php"; ?>
 
 <?php
+
+
        $rows = $conn->query("SELECT * FROM products WHERE status = 1");
        $rows->execute();
 
