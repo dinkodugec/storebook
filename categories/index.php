@@ -31,7 +31,7 @@
           <div class="text-muted"><?php echo $category->description;?></div>
 
         </div>
-        <a href="http://store.hr:8080/admin-panel/categories-admins/single_category.php?id=<?php echo $category->id; ?>"
+        <a href="http://store.hr:8080/categories/single_category.php?id=<?php echo $category->id; ?>"
           class="btn btn-primary w-100 rounded my-2">Discover Products</a>
       </div>
     </div>

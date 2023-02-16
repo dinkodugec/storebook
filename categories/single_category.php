@@ -6,7 +6,7 @@
 if(isset($_GET['id'])){
 
   $id = $_GET['id'];
-       $rows = $conn->query("SELECT * FROM products WHERE status = 1 AND category_id = '$id' ");
+       $rows = $conn->query("SELECT * FROM categories WHERE id = '$id' ");
        $rows->execute();
 
       $allRows = $rows->fetchAll(PDO::FETCH_OBJ);
@@ -17,18 +17,16 @@ if(isset($_GET['id'])){
 
 
 <div class="row mt-5">
-  <?php foreach($allRows as $product) : ?>
+  <?php foreach($allRows as $category) : ?>
   <div class="col-lg-4 col-md-6 col-sm-10 offset-md-0 offset-sm-1">
     <div class="card">
-      <img height="213px" class="card-img-top" src="../images/<?php echo $product->image; ?>">
+      <img height="213px" class="card-img-top"
+        src="<?php echo APPURL; ?>/admin-panel/categories-admins/images/<?php echo $category->image; ?>">
       <div class="card-body">
-        <h5 class="d-inline"><b><?php echo $product->name; ?></b> </h5>
+        <h5 class="d-inline"><b><?php echo $category->name; ?></b> </h5>
         <h5 class="d-inline">
-          <div class="text-muted d-inline">(<?php echo $product->price; ?>/item)</div>
+          <div class="text-muted d-inline"></div>
         </h5>
-        <p> <?php echo substr($product->description, 0, 50); ?></p>
-        <a href="<?php echo APPURL; ?>/shopping/single.php?id=<?php echo $product->id; ?>"
-          class="btn btn-primary w-100 rounded my-2"> More<i class="fas fa-arrow-right"></i> </a>
 
       </div>
     </div>
