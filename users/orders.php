@@ -7,23 +7,32 @@
       header("Location: ".APPURL."");
     }
 
+       if(isset($_GET['id'])){
  
-      if($id !== $_SESSION['user_id']){
-        header("Location: ".APPURL."");
-     }
- 
+         $id = $_GET['id'];
+
+        if($id !== $_SESSION['user_id']){
+          header("Location: ".APPURL."");
+       }
+   
+       }
+
+   
 
        $select = $conn->query("SELECT * FROM orders WHERE user_id='$_SESSION[user_id]'");
        $select->execute();
 
        $orders = $select->fetchAll(PDO::FETCH_OBJ);
 
-
+    /*    var_dump($orders);
+       die();
+ */
 ?>
 
 
-<div class="row mt-5">
+<div class="row mt-5" style="margin-bottom: 220px;">
   <div class="col">
+    <?php  if(count($orders) > 0 ) : ?>
     <div class="card">
       <div class="card-body">
         <h5 class="card-title mb-4 d-inline">Orders</h5>
@@ -57,6 +66,9 @@
         </table>
       </div>
     </div>
+    <?php else : ?>
+    <div class="alert alert-success text-white">No orders</div>
+    <?php endif; ?>
   </div>
 </div>
 
