@@ -38,7 +38,7 @@ try {
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
     $mail->Username   = 'dinko.dugec@gmail.com';                     //SMTP username
-    $mail->Password   = 'mdterzcowtywafpn';                               //SMTP password
+    $mail->Password   = '';                               //SMTP password
   /*   $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;  */           //Enable implicit TLS encryption
     $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -60,10 +60,7 @@ try {
   }
 
   
- $select = $conn->query("DELETE FROM cart WHERE user_id='$_SESSION[user_id]'");
- $select->execute();
- 
- header("Location: http://store.hr:8080");   
+
 
 /* 
     //Attachments
@@ -77,7 +74,12 @@ try {
    /*  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients'; */
 
     $mail->send();
-    echo 'Message has been sent';
+    
+    //delete cart items after sending products
+    $select = $conn->query("DELETE FROM cart WHERE user_id='$_SESSION[user_id]'");
+    $select->execute();
+ 
+ header("Location: http://store.hr:8080/success.php");   
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }

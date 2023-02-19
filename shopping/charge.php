@@ -13,7 +13,7 @@ if(!isset($_SESSION['username'])){
 
 \Stripe\Stripe::setApiKey($secret_key);
 
-APPURL;
+
 
 
  if(isset($_POST['email'])){ 
