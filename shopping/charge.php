@@ -61,7 +61,7 @@ $charge = \Stripe\Charge::create([
 ]); 
 
 
-header("Location: ".APPURL."download.php "); 
+header("Location: http://store.hr:8080/download.php"); 
 
 
 

@@ -32,6 +32,7 @@
                               if(password_verify($password, $fetch['password'])){
                                    $_SESSION['username'] = $fetch['username'];
                                     $_SESSION['user_id'] = $fetch['id'];
+                                    $_SESSION['email'] = $fetch['email']; //email of user, used in download.php
                                    /*  var_dump($_SESSION);
                                     die(); */
                                     header("Location: ../index.php");

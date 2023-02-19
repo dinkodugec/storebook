@@ -2,11 +2,11 @@
 <?php require "config/config.php"; ?>
 <?php 
 
-/* if(isset($_SERVER['HTTP_REFERER'])){
+  if(isset($_SERVER['HTTP_REFERER'])){
   //redirect them to your desired location
   header('Location: http://store.hr:8080/');
   exit;
-}
+} 
 
   $select = $conn->query("SELECT * FROM cart WHERE user_id='$_SESSION[user_id]'");
   $select->execute();
@@ -14,10 +14,6 @@
 
 
 
-$select = $conn->query("DELETE FROM cart WHERE user_id='$_SESSION[user_id]'");
-$select->execute();
-
-header("Location: http://store.hr:8080/index.php?download.php ");  */
 
 
 //Import PHPMailer classes into the global namespace
@@ -50,7 +46,24 @@ try {
     $mail->setFrom('dinko.dugec@gmail.com', 'BookStore');
 
      //Add a recipient
-    $mail->addAddress('dugecdinko@gmail.com', 'Dinko User');    
+    $mail->addAddress($_SESSION['email'], 'Dinko User');    
+
+    foreach($allProdcuts as $products) {
+      $path  = 'admin-panel/products-admins/books';
+      //$file = $products->pro_file;
+
+      for($i=0; $i < count($allProdcuts); $i++) {
+        
+          $mail->addAttachment($path . "/" . $products->pro_file);         //Add attachments
+
+      }
+  }
+
+  
+ $select = $conn->query("DELETE FROM cart WHERE user_id='$_SESSION[user_id]'");
+ $select->execute();
+ 
+ header("Location: http://store.hr:8080");   
 
 /* 
     //Attachments
@@ -60,7 +73,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Books you bought';
-    $mail->Body    = 'Here are your bokks <b>Thank you for buying</b>';
+    $mail->Body    = 'Here are your books, you paid '. $_SESSION['price'] .' € <b>Thank you for buying</b>';
    /*  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients'; */
 
     $mail->send();
