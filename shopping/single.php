@@ -139,6 +139,13 @@ if(isset($_GET['id'])){
                   <?php endif;  ?>
                   <?php endif;  ?>
                 </div>
+
+                <div>
+                  <button id="submit" class="wishlist-btn btn btn-primary text-uppercase mr-2 px-4" type="submit"><i
+                      class="fas fa-heart"></i> Add to cart</button>
+                </div>
+
+
               </form>
             </div>
           </div>
@@ -177,6 +184,35 @@ $(document).ready(function() {
       $("body").load("single.php?id=<?php echo $id; ?>");
 
     }
-  })
+  });
+
+  $(".wishlist-btn").on("click", function(e) { // (e) - event
+
+    e.preventDefault();
+
+    var formdata = $("#form-data").serialize() + '&submit=submit';
+
+    $.ajax({
+      type: "post",
+      url: "wishlist.php",
+      data: formdata,
+
+      success: function() {
+        alert("added to wishlist successfully");
+        // $("#submit").html("<i class='fas fa-shopping-cart'></i> Added to a cart").prop(
+        // "disabled", true);
+        //ref();
+      }
+    });
+
+    /*     function ref() { //reload page
+
+          $("body").load("single.php?id=<?php // echo $id; ?>");
+
+        } */
+  });
+
+
+
 });
 </script>
