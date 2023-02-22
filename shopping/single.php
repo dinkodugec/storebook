@@ -36,18 +36,29 @@ if(isset($_POST['submit'])){
 
 }
 
-if(isset($_GET['id'])){
+     if(isset($_GET['id'])){
  
-       $id = $_GET['id'];
+            $id = $_GET['id'];
 
-       if(isset($_SESSION['user_id'])){
+            if(isset($_SESSION['user_id'])){
 
-              //checking for product in cart
-          $select = $conn->query("SELECT * FROM cart WHERE product_id = '$id' AND user_id='$_SESSION[user_id]'");
-          $select->execute();
+                    //checking for product in cart
+                $select = $conn->query("SELECT * FROM cart WHERE product_id = '$id' AND user_id='$_SESSION[user_id]'");
+                $select->execute();
 
-       }
+                }
+                
+                if(isset($_SESSION['user_id'])){
 
+                    //gettin id for wishlist
+                    $select_wishlist = $conn->query("SELECT * FROM wishlist WHERE product_id = '$id' AND user_id='$_SESSION[user_id]'");
+                    $select_wishlist->execute();
+
+                    $fetch = $select_wishlist->fetch(PDO::FETCH_OBJ);
+                }
+
+       
+     
   
        //getting data for every product
        $row = $conn->query("SELECT * FROM products WHERE status = 1 AND id='$id'");
@@ -126,7 +137,6 @@ if(isset($_GET['id'])){
 
                 <div class="cart mt-4 align-items-center">
                   <?php  if(isset($_SESSION['user_id'])) :?>
-
                   <?php if($select->rowCount() > 0)   :?>
                   <!-- I means that we have item in cart -->
                   <button name="submit" id="submit" disabled class="btn btn-primary text-uppercase mr-2 px-4"
@@ -139,11 +149,18 @@ if(isset($_GET['id'])){
                   <?php endif;  ?>
                   <?php endif;  ?>
                 </div>
-
+                <?php  if(isset($_SESSION['user_id'])) :?>
+                <?php if($select_wishlist->rowCount() > 0)   :?>
+                <button id="submit" value="<?php echo $fetch->id; ?>"
+                  class="btn-delete-wishlist btn btn-primary text-uppercase mr-2 px-4"><i class="fas fa-heart"></i>
+                  Added to wishlist</button>
                 <div>
-                  <button id="submit" class="wishlist-btn btn btn-primary text-uppercase mr-2 px-4" type="submit"><i
-                      class="fas fa-heart"></i> Add to cart</button>
+                  <?php else : ?>
+                  <button id="submit" class="wishlist-btn btn btn-primary text-uppercase mr-2 px-4"><i
+                      class="fas fa-heart"></i> Add to wishlist</button>
                 </div>
+                <?php endif; ?>
+                <?php endif; ?>
 
 
               </form>
@@ -199,18 +216,41 @@ $(document).ready(function() {
 
       success: function() {
         alert("added to wishlist successfully");
-        // $("#submit").html("<i class='fas fa-shopping-cart'></i> Added to a cart").prop(
+        $(".wishlist-btn").html("<i class='fas fa-heart'></i> Added to wishlist").addClass(
+          ".btn-delete-wishlist").removeClass(".wishlist-btn");
         // "disabled", true);
-        //ref();
+        ref();
       }
     });
 
-    /*     function ref() { //reload page
+    function ref() { //reload page
 
-          $("body").load("single.php?id=<?php // echo $id; ?>");
+      $("body").load("single.php?id=<?php echo $id; ?>");
 
-        } */
+    }
   });
+
+  $(".btn-delete-wishlist").on('click', function(e) {
+
+    var id = $(this).val();
+
+
+    $.ajax({
+      type: "POST",
+      url: "delete-item-wishlist.php",
+      data: {
+        delete: "delete",
+        id: id
+      },
+
+      success: function() {
+        alert("product deleted successfully from wishlist");
+        //reload();
+      }
+    })
+  });
+
+
 
 
 
