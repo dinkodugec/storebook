@@ -230,7 +230,21 @@ $(document).ready(function() {
     }
   });
 
+
+
+  function ref() { //reload page
+
+    $("body").load("single.php?id=<?php echo $id; ?>");
+
+  }
+
+
+
+
   $(".btn-delete-wishlist").on('click', function(e) {
+
+    e.preventDefault();
+
 
     var id = $(this).val();
 
@@ -245,7 +259,9 @@ $(document).ready(function() {
 
       success: function() {
         alert("product deleted successfully from wishlist");
-        //reload();
+        $(".btn-delete-wishlist").html("<i class='fas fa-heart'></i> Add to wishlist").addClass(
+          "wishlist-btn").removeClass("btn-delete-wishlist");
+        ref();
       }
     })
   });
